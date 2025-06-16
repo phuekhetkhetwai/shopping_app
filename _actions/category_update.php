@@ -20,12 +20,12 @@ if($_SERVER["REQUEST_METHOD"] === "POST"){
     }else{
 
         if(!$name){
-            $_SESSION["nameerr"] = "* Name is required";
+            $_SESSION["nameerr"] = "Name is required";
             
         }
 
         if(!$desc){
-            $_SESSION["descerr"] = "* Description is required";
+            $_SESSION["descerr"] = "Description is required";
 
         }
 

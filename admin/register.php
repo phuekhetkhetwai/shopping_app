@@ -1,6 +1,7 @@
 <?php
 session_start();
 include "../config/common.php";
+
 ?>
 <!DOCTYPE html>
 <html lang="en">

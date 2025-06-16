@@ -1,14 +1,14 @@
 <?php
 session_start();
 require_once "../config/common.php";
-require_once "../_actions/category_action.php";
+require_once "../_actions/order_action.php";
 
 if(!$_SESSION["user"]){
     header("Location: login.php?auth=fail");
     exit();
 }
 
-$datas = allcategories();
+$datas = allorders();
 
 ?>
 
@@ -25,18 +25,19 @@ $datas = allcategories();
                                     <tr>
                                         <th>No.</th>
                                         <th style="width: 15%;">Name</th>
-                                        <th>Description</th>
-                                        <th>Actions</th>
+                                        <th>Total_price</th>
+                                        <th>Order_date</th>
+                                        <th>Action</th>
+
                                     </tr>
                                     <?php foreach($datas as $idx=>$data): ?>
                                         <tr>
                                             <td><?php echo ++$idx ?>.</td>
                                             <td><?php echo escape($data->name) ?></td>
-                                            <td><?php echo strlen($data->description) > 100 ? escape(substr($data->description,0 , 100)) . " ..." : escape($data->description) ?></td>
+                                            <td><?php echo escape($data->total_price) ?></td>
+                                            <td><?php echo escape(date("d-m-Y",strtotime($data->order_date))) ?></td>
                                             <td>
-                                                <a href="cat_edit.php?id=<?php echo $data->id ?>"><i class="fa-solid fa-pen"></i></a>
-                                                <a href="../_actions/category_delete.php?id=<?php echo $data->id ?>" class="text-danger ms-3" onclick="return confirm('Are you sure you want to delete this item?')"><i class="fa-solid fa-trash-alt"></i></a>
-
+                                                <a href="order_detail.php?id=<?php echo $data->id ?>" class="btn btn-outline-secondary">View</a>
                                             </td>
                                         </tr>
                                     <?php endforeach ?>    

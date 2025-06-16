@@ -2,6 +2,16 @@
 <?php
 session_start();
 require_once "../config/common.php";
+
+if(!$_SESSION["user"]){
+        header("Location: login.php?auth=fail");
+        exit();
+}
+
+if(!isset($_GET["required"])){
+    unset($_SESSION["datas"]);
+}
+
 ?>
 
 <?php include "layout/header.php";?>
@@ -19,13 +29,13 @@ require_once "../config/common.php";
                                     <input type="hidden" name="_token" value="<?php echo  $_SESSION['_token'] ?>">
                                     <div class="form-group mb-3">
                                         <label for="name" class="mb-2">Name</label>
-                                        <span class="text-danger"><?php echo isset($_SESSION["nameerr"]) ? $_SESSION["nameerr"] : "";unset($_SESSION["nameerr"]); ?></span>
-                                        <input type="text" name="name" id="name" class="form-control" placeholder="Name...">
+                                        <span class="small text-danger">* <?php echo isset($_SESSION["nameerr"]) ? $_SESSION["nameerr"] : "";unset($_SESSION["nameerr"]); ?></span>
+                                        <input type="text" name="name" id="name" class="form-control" placeholder="Name..." value="<?php echo isset($_SESSION["datas"]["name"]) ?  $_SESSION["datas"]["name"] : ""; ?>">
                                     </div>
                                     <div class="form-group mb-3">
                                         <label for="description" class="mb-2">Description</label>
-                                        <span class="text-danger"><?php echo isset($_SESSION["descerr"]) ? $_SESSION["descerr"] : "";unset($_SESSION["descerr"]); ?></span>
-                                        <textarea name="description" id="description" class="form-control" rows="5" placeholder="description..."></textarea>
+                                        <span class="small text-danger">* <?php echo isset($_SESSION["descerr"]) ? $_SESSION["descerr"] : "";unset($_SESSION["descerr"]); ?></span>
+                                        <textarea name="description" id="description" class="form-control" rows="5" placeholder="description..."><?php echo isset($_SESSION["datas"]["desc"]) ?  $_SESSION["datas"]["desc"] : ""; ?></textarea>
                                     </div>
                                     <div class="form-group">
                                         <a href="category.php" class="btn btn-secondary me-2">Back</a>    

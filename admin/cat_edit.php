@@ -4,6 +4,11 @@ session_start();
 require_once "../config/common.php";
 require_once "../_actions/category_action.php";
 
+if(!$_SESSION["user"]){
+    header("Location: login.php?auth=fail");
+    exit();
+}
+
 $data = getcategory($_GET["id"]);
 
 ?>
@@ -24,12 +29,12 @@ $data = getcategory($_GET["id"]);
                                     <input type="hidden" name="id" value="<?php echo  $_GET['id'] ?>">
                                     <div class="form-group mb-3">
                                         <label for="name" class="mb-2">Name</label>
-                                        <span class="text-danger"><?php echo isset($_SESSION["nameerr"]) ? $_SESSION["nameerr"] : "";unset($_SESSION["nameerr"]); ?></span>
+                                        <span class="small text-danger">* <?php echo isset($_SESSION["nameerr"]) ? $_SESSION["nameerr"] : "";unset($_SESSION["nameerr"]); ?></span>
                                         <input type="text" name="name" id="name" class="form-control" placeholder="Name..." value="<?php echo $data->name; ?>">
                                     </div>
                                     <div class="form-group mb-3">
                                         <label for="description" class="mb-2">Description</label>
-                                        <span class="text-danger"><?php echo isset($_SESSION["descerr"]) ? $_SESSION["descerr"] : "";unset($_SESSION["descerr"]); ?></span>
+                                        <span class="small text-danger">* <?php echo isset($_SESSION["descerr"]) ? $_SESSION["descerr"] : "";unset($_SESSION["descerr"]); ?></span>
                                         <textarea name="description" id="description" class="form-control" rows="5" placeholder="description..."><?php echo $data->description; ?></textarea>
                                     </div>
                                     <div class="form-group">

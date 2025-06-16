@@ -36,7 +36,9 @@
                                 <li class="nav-item nav-categories">Main</li>
                                 <li class="nav-item"><a href="index.php" class="nav-link text-white p-3 mb-2 sidebarlinks currents"><i class="fa-brands fa-product-hunt me-3"></i></i>Products</a></li>
                                 <li class="nav-item"><a href="category.php" class="nav-link text-white p-3 mb-2 sidebarlinks"><i class="fa-solid fa-list me-3"></i></i>Categories</a></li>
-                                <li class="nav-item"><a href="user_lists.php" class="nav-link text-white p-3 mb-2 sidebarlinks"><i class="fa-solid fa-users me-3"></i>Users</a></li>
+                                <li class="nav-item"><a href="user_list.php" class="nav-link text-white p-3 mb-2 sidebarlinks"><i class="fa-solid fa-users me-3"></i>Users</a></li>
+                                <li class="nav-item"><a href="order_list.php" class="nav-link text-white p-3 mb-2 sidebarlinks"><i class="fa-solid fa-table me-3"></i>Orders</a></li>
+
                             </ul>
                         </div>
 
@@ -47,8 +49,15 @@
                         <div class="col-lg-10 col-md-9 fixed-top ms-auto topnavbars">
                             <div class="row">
                                 <div class="navbar navbar-expand navbar-light bg-white shadow">
+                                    <?php
+                                        $link = $_SERVER["PHP_SELF"];
+                                        $link_arr = explode("/",$link);
+                                        $page = end($link_arr);
+                                    ?>
                                     <!-- start quick search -->
-                                    <form action="" method="post" class="me-auto">
+                                    <form action="<?php echo $page ?>" method="POST" class="me-auto">
+                                        <input type="hidden" name="_token" value="<?php echo  $_SESSION['_token'] ?>">
+
                                         <div class="input-group">
                                             <input type="text" name="search" id="search"
                                                 class="form-control border-0 shadow-none"
@@ -74,9 +83,8 @@
                                                     alt="user1">
                                             </a>
                                             <div class="dropdown-menu">
-                                                <a href="index.php" class="dropdown-item"><i
-                                                        class="fa-solid fa-user text-muted me-2"></i>User</a>
-                                                <a href="_actions/logout.php" class="dropdown-item"><i class="fa-solid fa-arrow-right-from-bracket text-muted me-2"></i>Logout</a>
+                                                <a href="../_actions/logout.php
+                                                " class="dropdown-item"><i class="fa-solid fa-arrow-right-from-bracket text-muted me-2"></i>Logout</a>
                                             </div>
                                         </li>
                                         <!-- user account -->

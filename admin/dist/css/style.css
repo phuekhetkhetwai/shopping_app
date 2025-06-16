@@ -15,16 +15,14 @@
 body {
     background-color: #f4f4f4;
 
-    margin: 0;
-    padding: 0;
-}
-
-nav, footer {
     font-family: "Source Sans 3", serif;
     font-optical-sizing: auto;
     font-weight: 300;
     font-style: normal;
     font-size: 14px;
+
+    margin: 0;
+    padding: 0;
 }
 
 a {
